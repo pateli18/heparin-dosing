@@ -13,13 +13,294 @@
 <body>
 
 	<div class="row">
-		<div class="col-md-6"></div>
-		<h2 class="input-header">Lab Results</h2>
+		<div class="col-md-6">
+			<h2 class="input-header">Most Recent Lab Results</h2>
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th>Lab</th>
+					<th>Value</th>
+					<th>Time</th>
+					<th>History</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>PTT</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PLT CT</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				</tbody>
+			</table>
+			<h2 class="input-header">Required Parameters</h2>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="inputWeight" class="col-sm-2 control-label">Weight</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="inputWeight" placeholder="Enter Weight">
+					</div>
+				</div>
 
-		<h2 class="input-header">Required Parameters</h2>
+				<div class="form-group">
+					<label for="inputHeight" class="col-sm-2 control-label">Height</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="inputHeight" placeholder="Enter Height">
+					</div>
+				</div>
 
-		<h2 class="input-header">Additional Parameters</h2>
-		<div class="col-md-6"></div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Indication</label>
+					<div class="col-sm-10">
+						<select class="form-control">
+							<option>Acute Coronary Syndrome</option>
+							<option>Atrial Fibrillation</option>
+							<option>Treatment of Acute DVT and/or PE</option>
+							<option>Mechanical Heart Valve</option>
+							<option>Treatment of Other Thromboembolism</option>
+							<option>Anticoagulation in Patient with Acute Stroke</option>
+							<option>Other - Custom Dose</option>
+						</select>
+					</div>
+				</div>
+			</form>
+
+			<h2 class="input-header">Additional Parameters</h2>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="inputAge" class="col-sm-2 control-label">Age</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" id="inputAge" placeholder="Enter Age">
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label for="inputCreatinine" class="col-sm-2 control-label">Creatinine</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" id="inputCreatinine" placeholder="Enter Creatinine mg / dl">
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label for="inputSOFA" class="col-sm-2 control-label">SOFA</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" id="inputSOFA" placeholder="Enter mean SOFA score">
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label for="inputElixhauser" class="col-sm-2 control-label">Elixhauser</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control" id="inputElixhauser" placeholder="Enter Elixhauser">
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Gender</label>
+					<div class="col-sm-8">
+						<button type="submit" class="btn btn-default col-sm-6">Female</button>
+						<button type="submit" class="btn btn-default col-sm-6">Male</button>
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Ethnicity</label>
+					<div class="col-sm-8">
+						<button type="submit" class="btn btn-default col-sm-6">Non-White</button>
+						<button type="submit" class="btn btn-default col-sm-6">White</button>
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">End-Stage Renal</label>
+					<div class="col-sm-8">
+						<button type="submit" class="btn btn-default col-sm-6">Yes</button>
+						<button type="submit" class="btn btn-default col-sm-6">No</button>
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Pulmonary Embolism</label>
+					<div class="col-sm-8">
+						<button type="submit" class="btn btn-default col-sm-6">Yes</button>
+						<button type="submit" class="btn btn-default col-sm-6">No</button>
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">ICU</label>
+					<div class="col-sm-8">
+						<select class="form-control">
+							<option>MICU</option>
+							<option>CCU</option>
+							<option>CSRU</option>
+							<option>SICU</option>
+							<option>FICU</option>
+							<option>Other</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+				</div>
+
+			</form>
+		</div>
+		<div class="col-md-6">
+			<h2>Dosing Protocol</h2>
+
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="inputBolus" class="col-sm-3 control-label">Infusion Bolus</label>
+					<div class="col-sm-5">
+						<input type="number" class="form-control" id="inputBolus" placeholder="Enter Dose (units IVP)">
+					</div>
+					<div class="col-sm-4">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="inputInfusion" class="col-sm-3 control-label">Infusion Rate</label>
+					<div class="col-sm-5">
+						<input type="number" class="form-control" id="inputInfusion" placeholder="Enter Dose (units / hr)">
+					</div>
+					<div class="col-sm-4">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3 column-header">
+						PTT (seconds)
+					</div>
+
+					<div class="col-sm-2 column-header">
+						Bolus (units)
+					</div>
+
+					<div class="col-sm-2 column-header">
+						Hold (min)
+					</div>
+
+					<div class="col-sm-5 column-header">
+						Rate Change (units / hr)
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="number" class="form-control" id="ptt1">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="bolus1">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="hold1">
+					</div>
+
+					<label class="col-sm-3 rate-change-label">Increase Rate by:</label>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="rcv1">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="number" class="form-control" id="ptt2">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="bolus2">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="hold2">
+					</div>
+
+					<label class="col-sm-3 rate-change-label">Increase Rate by:</label>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="rcv2">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="number" class="form-control" id="ptt3">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="bolus3">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="hold3">
+					</div>
+
+					<label class="col-sm-3 rate-change-label"></label>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="rcv3">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="number" class="form-control" id="ptt4">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="bolus4">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="hold4">
+					</div>
+
+					<label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="rcv4">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-3">
+						<input type="number" class="form-control" id="ptt5">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="bolus5">
+					</div>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="hold5">
+					</div>
+
+					<label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
+
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="rcv5">
+					</div>
+				</div>
+
+			</form>
+
+		</div>
 	</div>
 
 	<div class="row">
