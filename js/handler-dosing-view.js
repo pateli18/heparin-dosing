@@ -25,16 +25,18 @@ for (var inputCell in inputCellIds) {
 var baseBolusDose = {type:'Protocol', value:inputCellBaseValues['inputBolus']};
 var baseInfusionDose = {type:'Protocol', value:inputCellBaseValues['inputInfusion']};
 
-var bolusLine = new SingleLine('infusion-bolus-change-chart', baseBolusDose, 'inputBolus', ['Less', 'Greater']);
-var infusionLine = new SingleLine('infusion-rate-change-chart', baseInfusionDose, 'inputInfusion', ['Less', 'Greater']);
+var bolusLine = new SingleLine('infusion-bolus-change-chart', ['Less', 'Greater'], baseBolusDose, false, d3.format(','));
+var infusionLine = new SingleLine('infusion-rate-change-chart', ['Less', 'Greater'], baseInfusionDose, false, d3.format(','));
 
 function inputCellValueChange(element) {
     var cellId = element.target.id;
 
     if (cellId == 'inputBolus') {
-        bolusLine.wrangleData();
+        var newBolusDose = {type:'Physician', value:$('#inputBolus').val()};
+        bolusLine.updateChart([baseBolusDose, newBolusDose]);
     } else if (cellId == 'inputInfusion') {
-        infusionLine.wrangleData();
+        var newInfusionDose = {type:'Physician', value:$('#inputInfusion').val()};
+        infusionLine.updateChart([baseInfusionDose, newInfusionDose]);
     }
 
     var changeValue = $('#' + cellId).val();
@@ -65,3 +67,10 @@ for (var inputCell in inputCellIds) {
     $('#' + inputCellIds[inputCell]).on("change", inputCellValueChange);
 }
 
+var baseTherapeuticProb = {type:'Protocol', value:.0};
+var baseSubTherapeuticProb = {type:'Protocol', value:1.0};
+var baseSupraTherapeuticProb = {type:'Protocol', value:.40};
+
+var therapeuticLine = new SingleLine('therapeutic-prob-chart', ['0%', '100%'], baseTherapeuticProb, true, d3.format('.1%'));
+var subTherapeuticLine = new SingleLine('sub-therapeutic-prob-chart', ['0%', '100%'], baseSubTherapeuticProb, true, d3.format('.1%'));
+var supraTherapeuticLine = new SingleLine('supra-therapeutic-prob-chart', ['0%', '100%'], baseSupraTherapeuticProb, true, d3.format('.1%'));

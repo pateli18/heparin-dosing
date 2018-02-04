@@ -1,9 +1,9 @@
-SingleLine = function(_parentElement, _data, _inputElement, _labels) {
+SingleLine = function(_parentElement, _labels, _baseData, _probFlag, _formatter) {
     this.parentElement = _parentElement;
-    this.data = _data;
-    this.displayData = [];
-    this.inputElement = _inputElement;
     this.labels = _labels;
+    this.baseData = _baseData;
+    this.probFlag = _probFlag;
+    this.formatter = _formatter;
 
     this.initVis();
 };
@@ -11,7 +11,7 @@ SingleLine = function(_parentElement, _data, _inputElement, _labels) {
 SingleLine.prototype.initVis = function() {
     var vis = this;
 
-    vis.margin = {top:0, right:55, bottom:0, left:55};
+    vis.margin = {top:0, right:20, bottom:0, left:20};
 
     vis.width = $('#' + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 34 - vis.margin.top - vis.margin.bottom;
@@ -49,32 +49,36 @@ SingleLine.prototype.initVis = function() {
         .attr('class', 'd3-tip')
         .offset([-8, 0]);
 
-    vis.wrangleData();
+    vis.updateChart([vis.baseData]);
 };
 
-
-SingleLine.prototype.wrangleData = function() {
+SingleLine.prototype.updateChart = function(data) {
     var vis = this;
 
-    vis.displayData = [];
+    vis.displayData = data;
 
-    vis.physicianDose = +$('#' + vis.inputElement).val();
-    vis.displayData.push({type:'Physician', value:vis.physicianDose});
+    var baseValue;
+    vis.displayData.forEach(function(d) {
+        if (d.type == 'Protocol') {
+            baseValue = d.value;
+        }
+    });
 
-    vis.displayData.push(vis.data);
+    if (vis.probFlag == false) {
+        var maxIncrement = d3.max(vis.displayData, function(d) {
+            return Math.abs(d.value - baseValue);
+        });
 
-    vis.updateChart();
-};
+        var xScaleIncrement = Math.max(baseValue * .25, maxIncrement);
+        vis.xScale.domain([baseValue - xScaleIncrement, baseValue + xScaleIncrement]);
+    } else {
+        vis.xScale.domain([0, 1]);
+    }
 
-SingleLine.prototype.updateChart = function() {
-    var vis = this;
-
-    var xScaleIncrement = Math.max(vis.data.value * .25, Math.abs(vis.physicianDose - vis.data.value));
-    vis.xScale.domain([vis.data.value - xScaleIncrement, vis.data.value + xScaleIncrement]);
+    console.log(vis.displayData);
 
     vis.toolTip.html(function(d) {
-        console.log('working');
-        return '<strong style="color: ' + modelColorScale(d.type) + ';">' + d.type + '</strong>: ' + d3.format(',')(d.value);
+        return '<strong style="color: ' + modelColorScale(d.type) + ';">' + d.type + '</strong>: ' + vis.formatter(d.value);
     });
 
     vis.svg.call(vis.toolTip);
@@ -122,7 +126,7 @@ SingleLine.prototype.updateChart = function() {
             if (d.type === 'Protocol') {
                 return d.type;
             } else {
-                if (d.value === vis.data.value) {
+                if (d.value === baseValue) {
                     return '';
                 } else {
                     return d.type;
