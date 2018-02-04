@@ -1,4 +1,8 @@
 
+.section-header {
+    font-weight: bold;
+    font-size: 30px;
+}
 
 .column-header {
     background-color: black;
@@ -38,6 +42,7 @@
 
 .table-striped {
     font-size: .75em;
+    margin-bottom: 0px;
 }
 
 .parameter-label {

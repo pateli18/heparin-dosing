@@ -13,7 +13,7 @@ var probCharts = [];
 function generateProbabilitiesChart(element) {
     d3.select('#prob-container').append('h2')
         .attr('class', 'section-header')
-        .html('Probability');
+        .html('Probabilities');
 
     var form = d3.select('#prob-container').append('form')
         .attr('class', 'form-horizontal');
