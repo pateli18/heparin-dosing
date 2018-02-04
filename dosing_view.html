@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="inputBolus" class="col-sm-2 control-label">Infusion Bolus</label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="inputBolus" placeholder="Enter Dose (units IVP)">
+                            <input type="number" class="form-control" id="inputBolus" value="4900">
                         </div>
                         <div class="col-sm-6" id="infusion-bolus-change-chart">
                         </div>
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="inputInfusion" class="col-sm-2 control-label">Infusion Rate</label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="inputInfusion" placeholder="Enter Dose (units / hr)">
+                            <input type="number" class="form-control" id="inputInfusion" value="1100">
                         </div>
                         <div class="col-sm-6" id="infusion-rate-change-chart">
                         </div>
@@ -59,28 +59,28 @@
                     <div class="form-group">
 
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="ptt1">
+                            <input type="text" class="form-control" id="ptt1" value="0 - 39.9">
                         </div>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="bolus1">
+                            <input type="number" class="form-control" id="bolus1" value="2400">
                         </div>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="hold1">
+                            <input type="number" class="form-control" id="hold1" value="1200">
                         </div>
 
                         <label class="col-sm-3 rate-change-label">Increase Rate by:</label>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="rcv1">
+                            <input type="number" class="form-control" id="rcv1" value="250">
                         </div>
                     </div>
 
                     <div class="form-group">
 
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="ptt2">
+                            <input type="text" class="form-control" id="ptt2" value="40 - 59.9">
                         </div>
 
                         <div class="col-sm-2">
@@ -94,14 +94,14 @@
                         <label class="col-sm-3 rate-change-label">Increase Rate by:</label>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="rcv2">
+                            <input type="number" class="form-control" id="rcv2" value="100">
                         </div>
                     </div>
 
                     <div class="form-group">
 
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="ptt3">
+                            <input type="text" class="form-control" id="ptt3" value="60 - 99.9">
                         </div>
 
                         <div class="col-sm-2">
@@ -121,7 +121,7 @@
                     <div class="form-group">
 
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="ptt4">
+                            <input type="text" class="form-control" id="ptt4" value="100 - 119.9">
                         </div>
 
                         <div class="col-sm-2">
@@ -135,14 +135,14 @@
                         <label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="rcv4">
+                            <input type="number" class="form-control" id="rcv4" value="100">
                         </div>
                     </div>
 
                     <div class="form-group">
 
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="ptt5">
+                            <input type="text" class="form-control" id="ptt5" value="120 or greater">
                         </div>
 
                         <div class="col-sm-2">
@@ -150,30 +150,21 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="hold5">
+                            <input type="number" class="form-control" id="hold5" value="60">
                         </div>
 
                         <label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
 
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="rcv5">
+                            <input type="number" class="form-control" id="rcv5" value="250">
                         </div>
                     </div>
 
                 </form>
             </div>
 
-            <div class="row">
-
-                <div class="col-md-6" id="prob-container">
-                    <button type="button" class="btn btn-default" id="prob-view">View Probabilities</button>
-                </div>
-
-                <div class="col-md-6">
-                    <h2>Explanation</h2>
-                    <div id="explanation-chart"></div>
-                </div>
-
+            <div class="row" id="prob-container">
+                <button type="button" class="btn btn-default" id="prob-view">View Probabilities</button>
             </div>
 
         </div>
@@ -213,52 +204,82 @@
                 <h2>Patient Info</h2>
 
                 <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td>Weight</td>
-                        <td id="patientWeight"></td>
-                    </tr>
-                    <tr>
-                        <td>Height</td>
-                        <td id="patientHeight"></td>
-                    </tr>
-                    <tr>
-                        <td>Indication</td>
-                        <td id="patientIndication"></td>
-                    </tr>
-                    <tr>
-                        <td>Age</td>
-                        <td id="patientAge"></td>
-                    </tr>
-                    <tr>
-                        <td>Creatinine</td>
-                        <td id="patientCreatinine"></td>
-                    </tr>
-                    <tr>
-                        <td>Elixhauser</td>
-                        <td id="patientElixhauser"></td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td id="patientGender"></td>
-                    </tr>
-                    <tr>
-                        <td>Ethnicity</td>
-                        <td id="patientEthnicity"></td>
-                    </tr>
-                    <tr>
-                        <td>End-Stage Renal</td>
-                        <td id="patientRenal"></td>
-                    </tr>
-                    <tr>
-                        <td>Pulmonary Embolism</td>
-                        <td id="patientPE"></td>
-                    </tr>
-                    <tr>
-                        <td>ICU</td>
-                        <td id="patientICU"></td>
-                    </tr>
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Sub Risk Impact</th>
+                            <th>Supra Risk Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Weight</td>
+                            <td id="patientWeight"></td>
+                            <td id="patientWeightSubImpact"></td>
+                            <td id="patientWeightSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td id="patientHeight"></td>
+                            <td id="patientHeightSubImpact"></td>
+                            <td id="patientHeightSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Indication</td>
+                            <td id="patientIndication"></td>
+                            <td id="patientIndicationSubImpact"></td>
+                            <td id="patientIndicationSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td id="patientAge"></td>
+                            <td id="patientAgeSubImpact"></td>
+                            <td id="patientAgeSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Creatinine</td>
+                            <td id="patientCreatinine"></td>
+                            <td id="patientCreatinineSubImpact"></td>
+                            <td id="patientCreatinineSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Elixhauser</td>
+                            <td id="patientElixhauser"></td>
+                            <td id="patientElixhauserSubImpact"></td>
+                            <td id="patientElixhauserSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td id="patientGender"></td>
+                            <td id="patientGenderSubImpact"></td>
+                            <td id="patientGenderSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Ethnicity</td>
+                            <td id="patientEthnicity"></td>
+                            <td id="patientEthnicitySubImpact"></td>
+                            <td id="patientEthnicitySupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>End-Stage Renal</td>
+                            <td id="patientRenal"></td>
+                            <td id="patientRenalSubImpact"></td>
+                            <td id="patientRenalSupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>Pulmonary Embolism</td>
+                            <td id="patientPE"></td>
+                            <td id="patientPESubImpact"></td>
+                            <td id="patientPESupraImpact"></td>
+                        </tr>
+                        <tr>
+                            <td>ICU</td>
+                            <td id="patientICU"></td>
+                            <td id="patientICUSubImpact"></td>
+                            <td id="patientICUSupraImpact"></td>
+                        </tr>
+                    </tbody>
             </table>
             </div>
         </div>

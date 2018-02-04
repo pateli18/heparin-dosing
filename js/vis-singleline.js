@@ -100,7 +100,15 @@ SingleLine.prototype.updateChart = function(data) {
         .attr('cy', vis.height / 2)
         .attr('r', 7)
         .attr('fill', function(d) {
-            return modelColorScale(d.type);
+            if (d.type == 'Protocol') {
+                return modelColorScale(d.type);
+            } else {
+                if (d.value == baseValue) {
+                    return modelColorScale('Protocol');
+                } else {
+                    return modelColorScale(d.type);
+                }
+            }
         });
 
     circle.exit().remove();
@@ -123,10 +131,10 @@ SingleLine.prototype.updateChart = function(data) {
         })
         .attr('y', vis.height / 2 + 15)
         .text(function(d) {
-            if (d.type === 'Protocol') {
+            if (d.type == 'Protocol') {
                 return d.type;
             } else {
-                if (d.value === baseValue) {
+                if (d.value == baseValue) {
                     return '';
                 } else {
                     return d.type;

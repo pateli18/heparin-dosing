@@ -2,9 +2,38 @@ var modelColorScale = d3.scaleOrdinal()
     .range(["#887bb4", "#e69d49"])
     .domain(['Protocol', 'Physician']);
 
+// probability charts
+
+var probChartItems = [{title:'Therapeutic', value:.20, id:'therapeutic-prob-chart'},
+    {title:'Sub-Therapeutic', value:.80, id:'sub-therapeutic-prob-chart'},
+    {title:'Supra-Therapeutic', value:.40, id:'supra-therapeutic-prob-chart'}]
+
+var probCharts = [];
+
+function generateProbabilitiesChart(element) {
+    d3.select('#prob-container').append('h2')
+        .attr('class', 'section-header')
+        .html('Probability');
+
+    var form = d3.select('#prob-container').append('form')
+        .attr('class', 'form-horizontal');
+
+    probChartItems.forEach(function(d) {
+        var container = form.append('div').attr('class', 'form-group')
+        container.append('label').attr('class', 'col-sm-3 control-label').html(d.title);
+        container.append('div').attr('class', 'col-sm-9').attr('id', d.id);
+        var dataItem = {type:'Protocol', value:d.value};
+        var probChart = new SingleLine(d.id, ['0%', '100%'], dataItem, true, d3.format('.1%'));
+        probCharts.push(probChart);
+    });
+
+    d3.select('#prob-view').remove();
+}
+
+$('#prob-view').on("click", generateProbabilitiesChart);
+
 var inputLabel = ['ptt', 'bolus', 'hold', 'rcv'];
 var inputCellBaseValues = {};
-
 var inputCellIds = [];
 
 for (var label in inputLabel) {
@@ -17,13 +46,14 @@ inputCellIds.push('inputBolus');
 inputCellIds.push('inputInfusion');
 
 for (var inputCell in inputCellIds) {
-    var baseValue = Math.floor(Math.random() * (5000 - 0)) + 0;
-    $('#' + inputCellIds[inputCell]).val(baseValue);
-    inputCellBaseValues[inputCellIds[inputCell]] = baseValue;
+    inputCellBaseValues[inputCellIds[inputCell]] = $('#' + inputCellIds[inputCell]).val();
 }
 
-var baseBolusDose = {type:'Protocol', value:inputCellBaseValues['inputBolus']};
-var baseInfusionDose = {type:'Protocol', value:inputCellBaseValues['inputInfusion']};
+var baseBolusDose = {type:'Protocol', value:+inputCellBaseValues['inputBolus']};
+var baseInfusionDose = {type:'Protocol', value:+inputCellBaseValues['inputInfusion']};
+
+console.log(baseBolusDose);
+
 
 var bolusLine = new SingleLine('infusion-bolus-change-chart', ['Less', 'Greater'], baseBolusDose, false, d3.format(','));
 var infusionLine = new SingleLine('infusion-rate-change-chart', ['Less', 'Greater'], baseInfusionDose, false, d3.format(','));
@@ -60,6 +90,10 @@ function inputCellValueChange(element) {
             .attr('data-original-title', 'Protocol: ' + d3.format(',')(baseValue));
     }
 
+    probCharts.forEach(function(d) {
+        d.updateChart([d.baseData, {type:'Physician', value:Math.min(Math.max(Math.random(), 0), 1)}]);
+    });
+
     $('[data-toggle="tooltip"]').tooltip();
 }
 
@@ -67,30 +101,3 @@ for (var inputCell in inputCellIds) {
     $('#' + inputCellIds[inputCell]).on("change", inputCellValueChange);
 }
 
-var probChartItems = [{title:'Therapeutic', value:.20, id:'therapeutic-prob-chart'},
-    {title:'Sub-Therapeutic', value:.80, id:'sub-therapeutic-prob-chart'},
-    {title:'SupraTherapeutic', value:.40, id:'supra-therapeutic-prob-chart'}]
-
-var probCharts = [];
-
-function generateProbabilitiesChart(element) {
-    d3.select('#prob-container').append('h2')
-        .attr('class', 'section-header')
-        .html('Probability');
-
-    var form = d3.select('#prob-container').append('form')
-        .attr('class', 'form-horizontal');
-
-    probChartItems.forEach(function(d) {
-        var container = form.append('div').attr('class', 'form-group')
-        container.append('label').attr('class', 'col-sm-5 control-label').html(d.title);
-        container.append('div').attr('class', 'col-sm-7').attr('id', d.id);
-        var dataItem = {type:'Protocol', value:d.value};
-        var probChart = new SingleLine(d.id, ['0%', '100%'], dataItem, true, d3.format('.1%'));
-        probCharts.push(probChart);
-    });
-
-    d3.select('#prob-view').remove();
-}
-
-$('#prob-view').on("click", generateProbabilitiesChart);
