@@ -28,6 +28,22 @@
     color: white;
 }
 
+.fa-arrow-up {
+    color: #f03b20;
+}
+
+.fa-arrow-down {
+    color: #31a354;
+}
+
+#patient-info-output {
+    font-size: .75em;
+}
+
+.parameter-label {
+    font-weight: bold;
+}
+
 .d3-tip {
     line-height: 1;
     padding: 5px;

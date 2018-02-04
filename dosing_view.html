@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Heparin Dosage Tool</title>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto|Titillium+Web|Inconsolata|Lato" rel="stylesheet" type='text/css'>
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -14,7 +15,7 @@
 
     <div class="container">
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="row">
                 <h2>Dosing Protocol</h2>
 
@@ -169,6 +170,8 @@
 
         </div>
 
+        <div class="col-md-1"></div>
+
         <div class="col-md-4">
 
             <div class="row">
@@ -203,7 +206,7 @@
             <div class="row">
                 <h2>Patient Info</h2>
 
-                <table class="table table-striped">
+                <table id="patient-info-output" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Parameter</th>
@@ -214,67 +217,67 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Weight</td>
+                            <td class="parameter-label">Weight</td>
                             <td id="patientWeight"></td>
                             <td id="patientWeightSubImpact"></td>
                             <td id="patientWeightSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Height</td>
+                            <td class="parameter-label">Height</td>
                             <td id="patientHeight"></td>
                             <td id="patientHeightSubImpact"></td>
                             <td id="patientHeightSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Indication</td>
+                            <td class="parameter-label">Indication</td>
                             <td id="patientIndication"></td>
                             <td id="patientIndicationSubImpact"></td>
                             <td id="patientIndicationSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Age</td>
+                            <td class="parameter-label">Age</td>
                             <td id="patientAge"></td>
                             <td id="patientAgeSubImpact"></td>
                             <td id="patientAgeSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Creatinine</td>
+                            <td class="parameter-label">Creatinine</td>
                             <td id="patientCreatinine"></td>
                             <td id="patientCreatinineSubImpact"></td>
                             <td id="patientCreatinineSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Elixhauser</td>
+                            <td class="parameter-label">Elixhauser</td>
                             <td id="patientElixhauser"></td>
                             <td id="patientElixhauserSubImpact"></td>
                             <td id="patientElixhauserSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Gender</td>
+                            <td class="parameter-label">Gender</td>
                             <td id="patientGender"></td>
                             <td id="patientGenderSubImpact"></td>
                             <td id="patientGenderSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Ethnicity</td>
+                            <td class="parameter-label">Ethnicity</td>
                             <td id="patientEthnicity"></td>
                             <td id="patientEthnicitySubImpact"></td>
                             <td id="patientEthnicitySupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>End-Stage Renal</td>
+                            <td class="parameter-label">End-Stage Renal</td>
                             <td id="patientRenal"></td>
                             <td id="patientRenalSubImpact"></td>
                             <td id="patientRenalSupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>Pulmonary Embolism</td>
+                            <td class="parameter-label">Pulmonary Embolism</td>
                             <td id="patientPE"></td>
                             <td id="patientPESubImpact"></td>
                             <td id="patientPESupraImpact"></td>
                         </tr>
                         <tr>
-                            <td>ICU</td>
+                            <td class="parameter-label">ICU</td>
                             <td id="patientICU"></td>
                             <td id="patientICUSubImpact"></td>
                             <td id="patientICUSupraImpact"></td>

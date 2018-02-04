@@ -101,3 +101,31 @@ for (var inputCell in inputCellIds) {
     $('#' + inputCellIds[inputCell]).on("change", inputCellValueChange);
 }
 
+var patient_record;
+
+d3.csv('data/simulated_patient_records.csv', function(patient_data) {
+    console.log(patient_data);
+    var random_record = Math.floor(Math.random() * 300)
+    patient_data.forEach(function(d) {
+        if (+d.id == random_record) {
+            patient_record = d;
+        }
+    });
+
+    console.log(patient_record);
+
+    for (var param in patient_record) {
+        console.log('#patient' + param);
+        $('#patient' + param).html(patient_record[param]);
+        var random_prob = Math.random();
+        if (random_prob > 0.5) {
+            $('#patient' + param + 'SubImpact').html('<i class="fa fa-arrow-up"></i>');
+            $('#patient' + param + 'SupraImpact').html('<i class="fa fa-arrow-down"></i>');
+        } else {
+            $('#patient' + param + 'SubImpact').html('<i class="fa fa-arrow-down"></i>');
+            $('#patient' + param + 'SupraImpact').html('<i class="fa fa-arrow-up"></i>');
+        }
+    }
+
+});
+
