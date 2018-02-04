@@ -67,10 +67,30 @@ for (var inputCell in inputCellIds) {
     $('#' + inputCellIds[inputCell]).on("change", inputCellValueChange);
 }
 
-var baseTherapeuticProb = {type:'Protocol', value:.0};
-var baseSubTherapeuticProb = {type:'Protocol', value:1.0};
-var baseSupraTherapeuticProb = {type:'Protocol', value:.40};
+var probChartItems = [{title:'Therapeutic', value:.20, id:'therapeutic-prob-chart'},
+    {title:'Sub-Therapeutic', value:.80, id:'sub-therapeutic-prob-chart'},
+    {title:'SupraTherapeutic', value:.40, id:'supra-therapeutic-prob-chart'}]
 
-var therapeuticLine = new SingleLine('therapeutic-prob-chart', ['0%', '100%'], baseTherapeuticProb, true, d3.format('.1%'));
-var subTherapeuticLine = new SingleLine('sub-therapeutic-prob-chart', ['0%', '100%'], baseSubTherapeuticProb, true, d3.format('.1%'));
-var supraTherapeuticLine = new SingleLine('supra-therapeutic-prob-chart', ['0%', '100%'], baseSupraTherapeuticProb, true, d3.format('.1%'));
+var probCharts = [];
+
+function generateProbabilitiesChart(element) {
+    d3.select('#prob-container').append('h2')
+        .attr('class', 'section-header')
+        .html('Probability');
+
+    var form = d3.select('#prob-container').append('form')
+        .attr('class', 'form-horizontal');
+
+    probChartItems.forEach(function(d) {
+        var container = form.append('div').attr('class', 'form-group')
+        container.append('label').attr('class', 'col-sm-5 control-label').html(d.title);
+        container.append('div').attr('class', 'col-sm-7').attr('id', d.id);
+        var dataItem = {type:'Protocol', value:d.value};
+        var probChart = new SingleLine(d.id, ['0%', '100%'], dataItem, true, d3.format('.1%'));
+        probCharts.push(probChart);
+    });
+
+    d3.select('#prob-view').remove();
+}
+
+$('#prob-view').on("click", generateProbabilitiesChart);
