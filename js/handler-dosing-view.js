@@ -102,20 +102,24 @@ for (var inputCell in inputCellIds) {
 }
 
 var patient_record;
+var lab_record;
+var most_recent_lab;
 
-d3.csv('data/simulated_patient_records.csv', function(patient_data) {
-    console.log(patient_data);
-    var random_record = Math.floor(Math.random() * 300)
+queue()
+    .defer(d3.csv, 'data/simulated_patient_records.csv')
+    .defer(d3.json, 'data/patient_lab_data.json')
+    .await(function(error, patient_data, lab_data) {
+
+    var random_record = Math.floor(Math.random() * patient_data.length);
     patient_data.forEach(function(d) {
         if (+d.id == random_record) {
             patient_record = d;
         }
     });
 
-    console.log(patient_record);
+    lab_record = lab_data[+patient_record.id];
 
     for (var param in patient_record) {
-        console.log('#patient' + param);
         $('#patient' + param).html(patient_record[param]);
         var random_prob = Math.random();
         if (random_prob > 0.5) {
@@ -127,5 +131,19 @@ d3.csv('data/simulated_patient_records.csv', function(patient_data) {
         }
     }
 
+    lab_record.forEach(function(d) {
+        d.ts = d3.timeParse('%Y-%m-%d %H:%M:%S')(d.ts);
+    });
+
+    lab_record.sort(function(a, b) {
+        return b.ts - a.ts;
+    });
+
+    most_recent_lab = lab_record[0];
+    $('#pttValue').html(d3.format(',')(most_recent_lab.ptt));
+    $('#pttDate').html(d3.timeFormat('%b %d %H:%M')(most_recent_lab.ts));
+
+    $('#pltValue').html(d3.format(',')(most_recent_lab.plt));
+    $('#pltDate').html(d3.timeFormat('%b %d %H:%M')(most_recent_lab.ts));
 });
 

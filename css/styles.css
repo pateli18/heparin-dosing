@@ -36,7 +36,7 @@
     color: #31a354;
 }
 
-#patient-info-output {
+.table-striped {
     font-size: .75em;
 }
 
