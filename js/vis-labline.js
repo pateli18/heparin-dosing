@@ -15,6 +15,8 @@ LabLine.prototype.initVis = function() {
     vis.width = $("#" + vis.parentElement).width() - vis.margin.left - vis.margin.right;
     vis.height = 30 - vis.margin.top - vis.margin.bottom;
 
+    console.log(vis.width);
+
 
     // SVG drawing area
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
