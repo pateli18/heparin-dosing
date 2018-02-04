@@ -139,11 +139,15 @@ queue()
         return b.ts - a.ts;
     });
 
+    console.log(lab_record);
+
     most_recent_lab = lab_record[0];
     $('#pttValue').html(d3.format(',')(most_recent_lab.ptt));
     $('#pttDate').html(d3.timeFormat('%b %d %H:%M')(most_recent_lab.ts));
+    var pttChart = new LabLine('pttChart', lab_record, 'ptt');
 
     $('#pltValue').html(d3.format(',')(most_recent_lab.plt));
     $('#pltDate').html(d3.timeFormat('%b %d %H:%M')(most_recent_lab.ts));
+    var pltChart = new LabLine('pltChart', lab_record, 'plt');
 });
 
