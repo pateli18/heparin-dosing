@@ -117,7 +117,7 @@ SingleLine.prototype.updateChart = function() {
         .attr('x', function(d) {
             return vis.xScale(d.value);
         })
-        .attr('y', vis.height / 2 + 17)
+        .attr('y', vis.height / 2 + 15)
         .text(function(d) {
             if (d.type === 'Protocol') {
                 return d.type;

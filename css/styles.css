@@ -1,7 +1,31 @@
 
 
+.column-header {
+    background-color: black;
+    color: white;
+    height: 30px;
+    padding-top: 5px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+}
+
 .line-label, .dose-label {
     font-size: 8px;
+}
+
+.change-indicator {
+    fill: 'yellow';
+}
+
+.standard-input-cell {
+    background-color: #fff;
+    color: #555;
+}
+
+.changed-input-cell {
+    background-color: #e69d49;
+    color: white;
 }
 
 .d3-tip {
