@@ -15,26 +15,31 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-md-8">
 				<h2 class="section-header">Required Parameters <button type="button" class="btn btn-success" id="calculate-dose">Calculate Dose</button></h2>
 				<form class="form-horizontal">
 				<div class="form-group">
-					<label for="inputWeight" class="col-sm-2 control-label">Weight</label>
-					<div class="col-sm-10">
-						<input type="number" class="form-control" id="inputWeight" placeholder="Enter Weight">
+					<label for="inputWeight" class="col-sm-3 control-label">Weight</label>
+					<div class="col-sm-7">
+						<div class="input-group">
+							<input type="number" class="form-control" id="inputWeight" placeholder="Enter Weight">
+							<div class="input-group-addon">lbs</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="inputHeight" class="col-sm-2 control-label">Height</label>
-					<div class="col-sm-10">
-						<input type="number" class="form-control" id="inputHeight" placeholder="Enter Height">
+					<label for="inputHeight" class="col-sm-3 control-label">Height</label>
+					<div class="col-sm-7">
+						<div class="input-group">
+							<input type="number" class="form-control" id="inputHeight" placeholder="Enter Height">
+							<div class="input-group-addon">inches</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Indication</label>
-					<div class="col-sm-10">
+					<label class="col-sm-3 control-label">Indication</label>
+					<div class="col-sm-7">
 						<select class="form-control">
 							<option>Acute Coronary Syndrome</option>
 							<option>Atrial Fibrillation</option>
@@ -47,115 +52,98 @@
 					</div>
 				</div>
 			</form>
-			</div>
-
-			<div class="col-md-4">
-				<h2 class="section-header">Most Recent Lab Results</h2>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Lab</th>
-							<th>Value</th>
-							<th>Time</th>
-							<th>History</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>PTT</td>
-							<td id="pttValue"></td>
-							<td id="pttDate"></td>
-							<td id="pttChart"></td>
-						</tr>
-						<tr>
-							<td>PLT CT</td>
-							<td id="pltValue"></td>
-							<td id="pltDate"></td>
-							<td id="pltChart"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
 
 		</div>
 
 
 		<div class="row">
-			<div class="col-md-8">
+
 				<h2 class="section-header">Additional Parameters</h2>
 				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputAge" class="col-sm-3 control-label">Age</label>
 						<div class="col-sm-7">
-							<input type="number" class="form-control" id="inputAge" placeholder="Enter Age">
+							<div class="input-group">
+								<input type="number" class="form-control" id="inputAge" placeholder="Enter Age">
+								<div class="input-group-addon">years</div>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naAge" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-input-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label for="inputCreatinine" class="col-sm-3 control-label">Creatinine</label>
 						<div class="col-sm-7">
-							<input type="number" class="form-control" id="inputCreatinine" placeholder="Enter Creatinine mg / dl">
+							<div class="input-group">
+								<input type="number" class="form-control" id="inputCreatinine" placeholder="Enter Creatinine">
+								<div class="input-group-addon">mg / dl</div>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naCreatinine" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-input-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label for="inputSOFA" class="col-sm-3 control-label">SOFA</label>
 						<div class="col-sm-7">
-							<input type="number" class="form-control" id="inputSOFA" placeholder="Enter mean SOFA score">
+							<div class="input-group">
+								<input type="number" class="form-control" id="inputSOFA" placeholder="Enter mean SOFA score">
+								<div class="input-group-addon">score</div>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naSOFA" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-input-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label for="inputElixhauser" class="col-sm-3 control-label">Elixhauser</label>
 						<div class="col-sm-7">
-							<input type="number" class="form-control" id="inputElixhauser" placeholder="Enter Elixhauser">
+							<div class="input-group">
+								<input type="number" class="form-control" id="inputElixhauser" placeholder="Enter Elixhauser">
+								<div class="input-group-addon">score</div>
+							</div>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naElixhauser" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-input-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Gender</label>
 						<div class="col-sm-7">
-							<button type="submit" class="btn btn-default col-sm-6">Female</button>
-							<button type="submit" class="btn btn-default col-sm-6">Male</button>
+							<button id="inputGender1" type="submit" class="btn btn-default col-sm-6 input-button">Female</button>
+							<button id="inputGender2" type="submit" class="btn btn-default col-sm-6 input-button">Male</button>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naGender" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-button-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Ethnicity</label>
 						<div class="col-sm-7">
-							<button type="submit" class="btn btn-default col-sm-6">Non-White</button>
-							<button type="submit" class="btn btn-default col-sm-6">White</button>
+							<button id="inputEthnicity1" type="submit" class="btn btn-default col-sm-6 input-button">Non-White</button>
+							<button id="inputEthnicity2" type="submit" class="btn btn-default col-sm-6 input-button">White</button>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naEthnicity" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-button-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">End-Stage Renal</label>
 						<div class="col-sm-7">
-							<button type="submit" class="btn btn-default col-sm-6">Yes</button>
-							<button type="submit" class="btn btn-default col-sm-6">No</button>
+							<button id="inputRenal1" type="submit" class="btn btn-default col-sm-6 input-button">Yes</button>
+							<button id="inputRenal2" type="submit" class="btn btn-default col-sm-6 input-button">No</button>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naRenal" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-button-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Pulmonary Embolism</label>
 						<div class="col-sm-7">
-							<button type="submit" class="btn btn-default col-sm-6">Yes</button>
-							<button type="submit" class="btn btn-default col-sm-6">No</button>
+							<button id="inputPE1" type="submit" class="btn btn-default col-sm-6 input-button">Yes</button>
+							<button id="inputPE2" type="submit" class="btn btn-default col-sm-6 input-button">No</button>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naPE" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-button-button">N/A</button>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">ICU</label>
 						<div class="col-sm-7">
-							<select class="form-control">
+							<select id="inputICU" class="form-control">
 								<option>MICU</option>
 								<option>CCU</option>
 								<option>CSRU</option>
@@ -164,11 +152,10 @@
 								<option>Other</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-default col-sm-2">Unknown</button>
+						<button id="naICU" data-toggle="tooltip" data-placement="top" title="Select if data is unavailable for this parameter" type="submit" class="btn btn-default col-sm-1 na-input-button">N/A</button>
 					</div>
 
 				</form>
-			</div>
 		</div>
 
 	</div>
@@ -176,13 +163,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/d3.min.js"></script>
-	<script src="js/d3-legend.min.js"></script>
-	<script src="js/d3-tip.js"></script>
-	<script src="js/queue.min.js"></script>
 
-	<script src="js/vis-labline.js"></script>
-
-	<script src="js/handler-labs.js"></script>
+	<script src="js/handler-input.js"></script>
 </body>
 </html>
