@@ -81,3 +81,48 @@ function input_button_clicked(element) {
 }
 
 $('.input-button').on('click', input_button_clicked);
+
+var patient_data;
+
+d3.csv('data/simulated_patient_records.csv', function(raw_patient_data) {
+
+    patient_data = raw_patient_data;
+
+});
+
+function generatePatient() {
+
+    var patient_record;
+    var random_record = Math.floor(Math.random() * patient_data.length);
+
+    patient_data.forEach(function(d) {
+        if (+d.id == random_record) {
+            patient_record = d;
+        }
+    });
+
+    for (var param in patient_record) {
+        if (param in patientParams) {
+            if (patientParams[param].type == 'field') {
+                $('#input' + param).val(patient_record[param]);
+            } else {
+                var button1Clicked = ($('#input' + param + 1).html() == patient_record[param]);
+                if (button1Clicked) {
+                    $('#input' + param + 1).addClass('input-clicked');
+                    $('#input' + param + 1).removeClass('btn-default');
+                    $('#input' + param + 1).addClass('btn-success');
+                    $('#input' + param + 2).addClass('btn-default');
+                    $('#input' + param + 2).removeClass('btn-success');
+                    $('#input' + param + 2).removeClass('input-clicked');
+                } else {
+                    $('#input' + param + 2).addClass('input-clicked');
+                    $('#input' + param + 2).removeClass('btn-default');
+                    $('#input' + param + 2).addClass('btn-success');
+                    $('#input' + param + 1).addClass('btn-default');
+                    $('#input' + param + 1).removeClass('btn-success');
+                    $('#input' + param + 1).removeClass('input-clicked');
+                }
+            }
+        }
+    }
+}
