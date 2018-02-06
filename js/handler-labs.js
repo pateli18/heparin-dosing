@@ -7,17 +7,26 @@ queue()
     .defer(d3.json, 'data/patient_lab_data.json')
     .await(function(error, patient_data, lab_data) {
 
-        var random_record = Math.floor(Math.random() * patient_data.length);
-        patient_data.forEach(function(d) {
-            if (+d.id == random_record) {
-                patient_record = d;
-            }
-        });
+        var patient_record = {};
+        location.search.substr(1).split("&").forEach(function(item) {patient_record[item.split("=")[0]] = item.split("=")[1]});
 
-        lab_record = lab_data[+patient_record.id];
+        var random_record = Math.floor(Math.random() * patient_data.length);
+        if ("Weight" in patient_record) {
+            lab_record = lab_data[random_record];
+        } else {
+            var random_record = Math.floor(Math.random() * patient_data.length);
+            patient_data.forEach(function(d) {
+                if (+d.id == random_record) {
+                    patient_record = d;
+                }
+            });
+
+            lab_record = lab_data[+patient_record.id];
+        }
 
         for (var param in patient_record) {
-            $('#patient' + param).html(patient_record[param]);
+            var value = patient_record[param];
+            $('#patient' + param).html(value.split('+').join(' '));
             var random_prob = Math.random();
             if (random_prob > 0.5) {
                 $('#patient' + param + 'SubImpact').html('<i class="fa fa-arrow-up"></i>');
