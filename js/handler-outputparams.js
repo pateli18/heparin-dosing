@@ -25,7 +25,17 @@ function getParams() {
         if (unknownFlag) {
             patientParams[param].value = 'Unknown';
         } else  if (patientParams[param].type == 'field') {
-            patientParams[param].value = $('#input' + param).val();
+            var fieldValue = $('#input' + param).val();
+            if (fieldValue == "") {
+                patientParams[param].value = 'Unknown';
+                if (param == 'Weight' || param == 'Height') {
+                    $('#formgroup' + param).addClass('has-error');
+                    return false
+                }
+            } else {
+                $('#formgroup' + param).removeClass('has-error');
+                patientParams[param].value = fieldValue;
+            }
         } else {
             var button1Class = $('#input' + param + 1).attr("class").split(' ');
             var button2Class = $('#input' + param + 2).attr("class").split(' ');
@@ -38,14 +48,18 @@ function getParams() {
             }
         }
     }
+
+    return true
 }
 
 function calculateDose() {
-    getParams();
-    var queryParams = {};
-    for (var param in patientParams) {
-        queryParams[param] = patientParams[param].value;
+    var execute = getParams();
+    if (execute) {
+        var queryParams = {};
+        for (var param in patientParams) {
+            queryParams[param] = patientParams[param].value;
+        }
+        var query = $.param(queryParams);
+        window.location = '/prototype_v0/dosing_view.html?_ijt=bda6dajl46du6r2l46it5docj2&' + String(query);
     }
-    var query = $.param(queryParams);
-    window.location = '/prototype_v0/dosing_view.html?_ijt=bda6dajl46du6r2l46it5docj2&' + String(query);
 }
