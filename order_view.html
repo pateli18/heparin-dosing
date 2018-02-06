@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heparin Dosage Tool</title>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto|Titillium+Web|Inconsolata|Lato" rel="stylesheet" type='text/css'>
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="col-md-7">
+        <div class="row">
+            <h2 class="section-header">Dosing Protocol <a href="dosing_submission.html"><button type="button" class="btn btn-success" id="submit-order">Approve Order</button></a></h2>
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputBolus" class="col-sm-2 control-label">Infusion Bolus</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="inputBolus" value="4900">
+                    </div>
+                    <div class="col-sm-6" id="infusion-bolus-change-chart">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputInfusion" class="col-sm-2 control-label">Infusion Rate</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="inputInfusion" value="1100">
+                    </div>
+                    <div class="col-sm-6" id="infusion-rate-change-chart">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <div class="column-header">PTT (seconds)</div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="column-header">Bolus (units)</div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="column-header">Hold (min)</div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="column-header">Rate Change (units / hr)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="ptt1" value="0 - 39.9">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="bolus1" value="2400">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="hold1" value="1200">
+                    </div>
+
+                    <label class="col-sm-3 rate-change-label">Increase Rate by:</label>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="rcv1" value="250">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="ptt2" value="40 - 59.9">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="bolus2">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="hold2">
+                    </div>
+
+                    <label class="col-sm-3 rate-change-label">Increase Rate by:</label>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="rcv2" value="100">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="ptt3" value="60 - 99.9">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="bolus3">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="hold3">
+                    </div>
+
+                    <label class="col-sm-3 rate-change-label">Therapeutic Level</label>
+
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="ptt4" value="100 - 119.9">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="bolus4">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="hold4">
+                    </div>
+
+                    <label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="rcv4" value="100">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="ptt5" value="120 or greater">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="bolus5">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="hold5" value="60">
+                    </div>
+
+                    <label class="col-sm-3 rate-change-label">Decrease Rate by:</label>
+
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="rcv5" value="250">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="row" id="prob-container">
+            <button type="button" class="btn btn-primary" id="prob-view">View Probabilities</button>
+        </div>
+
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-4">
+
+        <div class="row">
+            <div id="physician-container">
+                <h2 class="section-header">Physician Info</h2>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td class="parameter-label">Name</td>
+                        <td>Bob Smith</td>
+                    </tr>
+                    <tr>
+                        <td class="parameter-label">Pager</td>
+                        <td>555-5555</td>
+                    </tr>
+                    <tr>
+                        <td class="parameter-label">Reason for Override</td>
+                        <td>Standard scale too agressive</td>
+                    </tr>
+                    <tr>
+                        <td class="parameter-label">Override Comments</td>
+                        <td>The protocol seems too high given previous experience</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <h2 class="section-header">Lab Results</h2>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Lab</th>
+                    <th>Value</th>
+                    <th>Time</th>
+                    <th>History</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>PTT</td>
+                    <td id="pttValue"></td>
+                    <td id="pttDate"></td>
+                    <td id="pttChart"></td>
+                </tr>
+                <tr>
+                    <td>PLT CT</td>
+                    <td id="pltValue"></td>
+                    <td id="pltDate"></td>
+                    <td id="pltChart"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <h2 class="section-header">Patient Info</h2>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                    <th>Sub Risk Impact</th>
+                    <th>Supra Risk Impact</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="parameter-label">Weight</td>
+                    <td id="patientWeight"></td>
+                    <td id="patientWeightSubImpact"></td>
+                    <td id="patientWeightSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Height</td>
+                    <td id="patientHeight"></td>
+                    <td id="patientHeightSubImpact"></td>
+                    <td id="patientHeightSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Indication</td>
+                    <td id="patientIndication"></td>
+                    <td id="patientIndicationSubImpact"></td>
+                    <td id="patientIndicationSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Age</td>
+                    <td id="patientAge"></td>
+                    <td id="patientAgeSubImpact"></td>
+                    <td id="patientAgeSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Creatinine</td>
+                    <td id="patientCreatinine"></td>
+                    <td id="patientCreatinineSubImpact"></td>
+                    <td id="patientCreatinineSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Elixhauser</td>
+                    <td id="patientElixhauser"></td>
+                    <td id="patientElixhauserSubImpact"></td>
+                    <td id="patientElixhauserSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Gender</td>
+                    <td id="patientGender"></td>
+                    <td id="patientGenderSubImpact"></td>
+                    <td id="patientGenderSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Ethnicity</td>
+                    <td id="patientEthnicity"></td>
+                    <td id="patientEthnicitySubImpact"></td>
+                    <td id="patientEthnicitySupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">End-Stage Renal</td>
+                    <td id="patientRenal"></td>
+                    <td id="patientRenalSubImpact"></td>
+                    <td id="patientRenalSupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">Pulmonary Embolism</td>
+                    <td id="patientPE"></td>
+                    <td id="patientPESubImpact"></td>
+                    <td id="patientPESupraImpact"></td>
+                </tr>
+                <tr>
+                    <td class="parameter-label">ICU</td>
+                    <td id="patientICU"></td>
+                    <td id="patientICUSubImpact"></td>
+                    <td id="patientICUSupraImpact"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/d3-tip.js"></script>
+<script src="js/queue.min.js"></script>
+
+<script src="js/vis-singleline.js"></script>
+<script src="js/vis-labline.js"></script>
+
+<script src="js/handler-labs.js"></script>
+<script src="js/handler-dosingview.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#inputBolus').val(4300).trigger('change');
+        $('#inputInfusion').val(1000).trigger('change');
+    });
+</script>
+
+</body>
+</html>
