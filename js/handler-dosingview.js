@@ -104,8 +104,8 @@ for (var inputCell in inputCellIds) {
 function submitOrder() {
     var override = $('input').hasClass('changed-input-cell');
     if (override) {
-        window.location = '/prototype_v0/dosing_override.html?_ijt=bda6dajl46du6r2l46it5docj2';
+        window.location = 'dosing_override.html';
     } else {
-        window.location = '/prototype_v0/dosing_submission.html?_ijt=bda6dajl46du6r2l46it5docj2';
+        window.location = 'dosing_submission.html';
     }
 }

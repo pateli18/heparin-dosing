@@ -60,6 +60,6 @@ function calculateDose() {
             queryParams[param] = patientParams[param].value;
         }
         var query = $.param(queryParams);
-        window.location = '/prototype_v0/dosing_view.html?_ijt=bda6dajl46du6r2l46it5docj2&' + String(query);
+        window.location = 'dosing_view.html?' + String(query);
     }
 }
