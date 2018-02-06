@@ -100,3 +100,10 @@ function inputCellValueChange(element) {
 for (var inputCell in inputCellIds) {
     $('#' + inputCellIds[inputCell]).on("change", inputCellValueChange);
 }
+
+function submitOrder() {
+    var override = $('input').hasClass('changed-input-cell');
+    if (override) {
+        window.location = '/prototype_v0/dosing_override.html?_ijt=bda6dajl46du6r2l46it5docj2';
+    }
+}
