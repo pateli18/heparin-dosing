@@ -3,34 +3,10 @@ var modelColorScale = d3.scaleOrdinal()
     .domain(['Protocol', 'Physician']);
 
 // probability charts
-
-var probChartItems = [{title:'Therapeutic', value:.20, id:'therapeutic-prob-chart'},
-    {title:'Sub-Therapeutic', value:.80, id:'sub-therapeutic-prob-chart'},
-    {title:'Supra-Therapeutic', value:.40, id:'supra-therapeutic-prob-chart'}]
-
-var probCharts = [];
-
-function generateProbabilitiesChart(element) {
-    d3.select('#prob-container').append('h2')
-        .attr('class', 'section-header')
-        .html('Probabilities');
-
-    var form = d3.select('#prob-container').append('form')
-        .attr('class', 'form-horizontal');
-
-    probChartItems.forEach(function(d) {
-        var container = form.append('div').attr('class', 'form-group')
-        container.append('label').attr('class', 'col-sm-3 control-label').html(d.title);
-        container.append('div').attr('class', 'col-sm-9').attr('id', d.id);
-        var dataItem = {type:'Protocol', value:d.value};
-        var probChart = new SingleLine(d.id, ['0%', '100%'], dataItem, true, d3.format('.1%'));
-        probCharts.push(probChart);
-    });
-
-    d3.select('#prob-view').remove();
-}
-
-$('#prob-view').on("click", generateProbabilitiesChart);
+var theraChart = new SingleLine('therapeutic-prob-chart', ['0%', '100%'], {type:'Protocol', value:.20}, true, d3.format('.1%'));
+var subChart = new SingleLine('sub-therapeutic-prob-chart', ['0%', '100%'], {type:'Protocol', value:.80}, true, d3.format('.1%'));
+var supraChart = new SingleLine('supra-therapeutic-prob-chart', ['0%', '100%'], {type:'Protocol', value:.40}, true, d3.format('.1%'));
+var probCharts = [theraChart, subChart, supraChart];
 
 var inputLabel = ['ptt', 'bolus', 'hold', 'rcv'];
 var inputCellBaseValues = {};
@@ -90,11 +66,26 @@ function inputCellValueChange(element) {
             .attr('data-original-title', 'Protocol: ' + d3.format(',')(baseValue));
     }
 
-    probCharts.forEach(function(d) {
-        d.updateChart([d.baseData, {type:'Physician', value:Math.min(Math.max(Math.random(), 0), 1)}]);
-    });
 
     $('[data-toggle="tooltip"]').tooltip();
+
+    var cellChangedFlag = false;
+    for (var inputCell in inputCellIds) {
+        if ($('#' + inputCellIds[inputCell]).hasClass("changed-input-cell")) {
+            $('.protocol-change-flag').css("display", "inline");
+            cellChangedFlag = true;
+        }
+    }
+    if (!cellChangedFlag) {
+        $('.protocol-change-flag').css("display", "none");
+        probCharts.forEach(function(d) {
+            d.updateChart([d.baseData]);
+        });
+    } else {
+        probCharts.forEach(function(d) {
+            d.updateChart([d.baseData, {type:'Physician', value:Math.min(Math.max(Math.random(), 0), 1)}]);
+        });
+    }
 }
 
 for (var inputCell in inputCellIds) {

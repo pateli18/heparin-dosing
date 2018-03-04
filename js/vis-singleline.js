@@ -25,12 +25,24 @@ SingleLine.prototype.initVis = function() {
     vis.xScale = d3.scaleLinear()
         .range([0, vis.width]);
 
-    vis.svg.append('line')
+    vis.line = vis.svg.append('line')
         .attr('x1', 0)
         .attr('x2', vis.width)
         .attr('y1', vis.height / 2)
-        .attr('y2', vis.height / 2)
-        .attr('stroke', 'black');
+        .attr('y2', vis.height / 2);
+
+    if (vis.probFlag) {
+        vis.line.attr('stroke-width', '3px');
+        if (vis.parentElement === 'therapeutic-prob-chart') {
+            vis.lineColor = d3.scaleSequential(d3.interpolateGreens)
+                .domain([0, 1]);
+        } else {
+            vis.lineColor = d3.scaleSequential(d3.interpolateReds)
+                .domain([0, 1]);
+        }
+    } else {
+        vis.line.attr('stroke', 'black')
+    }
 
     vis.svg.append('text')
         .attr('class', 'line-label')
@@ -57,6 +69,10 @@ SingleLine.prototype.updateChart = function(data) {
 
     vis.displayData = data;
 
+    if (vis.probFlag) {
+        vis.line.attr('stroke', vis.lineColor(vis.displayData[vis.displayData.length - 1].value));
+    }
+
     var baseValue;
     vis.displayData.forEach(function(d) {
         if (d.type == 'Protocol') {
@@ -74,8 +90,6 @@ SingleLine.prototype.updateChart = function(data) {
     } else {
         vis.xScale.domain([0, 1]);
     }
-
-    console.log(vis.displayData);
 
     vis.toolTip.html(function(d) {
         return '<strong style="color: ' + modelColorScale(d.type) + ';">' + d.type + '</strong>: ' + vis.formatter(d.value);

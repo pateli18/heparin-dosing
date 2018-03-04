@@ -17,7 +17,7 @@
 
     <div class="col-md-7">
         <div class="row">
-            <h2 class="section-header">Dosing Protocol <a href="dosing_submission.html"><button type="button" class="btn btn-success" id="submit-order">Approve Order</button></a></h2>
+            <h2 class="section-header">Dosing Protocol <button onclick="submitOrder()" type="button" class="btn btn-success" id="submit-dose">Submit Order</button> <div class="btn btn-warning protocol-change-flag">Dosing Changed from Protocol</div></h2>
 
             <form class="form-horizontal">
                 <div class="form-group">
@@ -165,7 +165,21 @@
         </div>
 
         <div class="row" id="prob-container">
-            <button type="button" class="btn btn-primary" id="prob-view">View Probabilities</button>
+            <h2 class="section-header">Probabilities</h2>
+            <form class="form-horizontal">
+                <div class="form-group" id="therapeutic-prob-chart-group">
+                    <label class="col-sm-3 control-label">Therapeutic</label>
+                    <div class="col-sm-9" id="therapeutic-prob-chart"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Sub-Therapeutic</label>
+                    <div class="col-sm-9" id="sub-therapeutic-prob-chart"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Supra-Therapeutic</label>
+                    <div class="col-sm-9" id="supra-therapeutic-prob-chart"></div>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -249,12 +263,6 @@
                     <td id="patientWeightSupraImpact"></td>
                 </tr>
                 <tr>
-                    <td class="parameter-label">Height</td>
-                    <td id="patientHeight"></td>
-                    <td id="patientHeightSubImpact"></td>
-                    <td id="patientHeightSupraImpact"></td>
-                </tr>
-                <tr>
                     <td class="parameter-label">Indication</td>
                     <td id="patientIndication"></td>
                     <td id="patientIndicationSubImpact"></td>
@@ -321,6 +329,7 @@
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/d3.min.js"></script>
+<script src="js/d3-scale-chromatic.min.js"></script>
 <script src="js/d3-tip.js"></script>
 <script src="js/queue.min.js"></script>
 

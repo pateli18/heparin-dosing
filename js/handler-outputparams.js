@@ -1,5 +1,6 @@
 var patientParams = {'Weight':{type:'field', value:null},
-    'Height':{type:'field', value:null},
+    'Feet':{type:'field', value:null},
+    'Inches':{type:'field', value:null},
     'Indication':{type:'field', value:null},
     'Age':{type:'field', value:null},
     'Creatinine':{type:'field', value:null},
@@ -15,7 +16,7 @@ function getParams() {
     for (var param in patientParams) {
 
         var unknownFlag;
-        if (param == 'Weight' || param == 'Height' || param == 'Indication') {
+        if (param == 'Weight' || param == 'Feet' || param == 'Inches' || param == 'Indication') {
             unknownFlag = false;
         } else {
             var paramClass = $('#na' + param).attr("class").split(' ');

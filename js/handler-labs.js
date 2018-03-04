@@ -28,10 +28,10 @@ queue()
             var value = patient_record[param];
             $('#patient' + param).html(value.split('+').join(' '));
             var random_prob = Math.random();
-            if (random_prob > 0.5) {
+            if (random_prob > 0.7) {
                 $('#patient' + param + 'SubImpact').html('<i class="fa fa-arrow-up"></i>');
                 $('#patient' + param + 'SupraImpact').html('<i class="fa fa-arrow-down"></i>');
-            } else {
+            } else if (random_prob < 0.3) {
                 $('#patient' + param + 'SubImpact').html('<i class="fa fa-arrow-down"></i>');
                 $('#patient' + param + 'SupraImpact').html('<i class="fa fa-arrow-up"></i>');
             }

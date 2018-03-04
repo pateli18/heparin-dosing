@@ -63,6 +63,17 @@
     fill: #e69d49;
 }
 
+#therapeutic-prob-chart-group {
+    margin-bottom: 20px;
+}
+
+.protocol-change-flag {
+    display: none;
+}
+
+.th {
+    text-align: center;
+}
 
 .d3-tip {
     line-height: 1;
